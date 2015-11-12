@@ -1,0 +1,43 @@
+
+bool stadm::rewrite()
+{
+	string s;
+A:	cout<<"请输入改写资料学生姓名："<<endl;
+	cin>>s;
+	cout<< s << "的原始资料为："<<endl;
+	if(search(s)==1)
+		goto A;
+	cout<<"请输入改写后的学生姓名 性别（M/F） 成绩：";
+	char g;
+	cin>>name>>g>>point;
+	if(g=='M'||g=='m')	gender = 1;
+	else	gender = 0;
+	del(s);store();
+	return 0;
+}
+
+bool stadm::del(char* a)
+{
+	if(strcmp(a,"none")==0)
+	{
+		cout<<"请输入要删除的学生姓名："<<endl;
+		cin>>a;
+	}
+	fstream f("stu.dat",ios::in|ios::out);
+	if(!f)	throw wrong();
+	string s;
+	int cur=0;
+	while(!f.eof())
+	{
+		cur=f.tellg();
+		f>>s;
+		if(s.find(a)!=-1)
+			break;
+	}
+	f.seekp(cur,ios::beg);
+	f>>'\0';
+	f.close();
+}
+
+
+

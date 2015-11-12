@@ -1,0 +1,82 @@
+//写一个Max函数模板，用来返回一个任意类型的数组中最大元素的地址。分别用这个函数模板来取得并输出一个char数组、double数组、Date数组和Person数组中的最大元素。
+//finished!!!!!!!!!!!!
+#include <iostream>
+typedef unsigned int uint;
+using namespace std;
+struct Date{
+	 int year;
+	 int month;
+	 int day;
+	Date():year(2000),month(1),day(1){}
+	Date(int y,int m,int d):year(y),month(m),day(d){}
+	friend bool operator>(const Date& l,const Date& r)
+	{
+		if(l.year>r.year)	return 1;
+		if(l.month>r.month)	return 1;
+		if(l.day>r.day)		return 1;
+		return 0;
+	}
+	friend ostream& operator<<(ostream& o,const Date& r)
+	{
+		cout << r.year << '-' << r.month << '-' << r.day <<' ';
+		return o;
+	}
+};
+struct Person{
+	string name;
+	bool gender;
+	int age;
+	Person():name(string()),gender(1),age(0){}
+	Person(const char* n,bool g,int a):name(n),gender(g),age(a){}
+public:
+	bool operator>(const Person& p)
+	{
+		if(age>p.age)	return 1;
+		else	return 0;
+	}
+	friend ostream& operator<<(ostream& o,const Person& p)
+	{
+		cout << "name:\t" << p.name << "\ngender:\t" << (p.gender?"male":"female") << "\nage:\t" << p.age <<endl;
+		return o;
+	}
+
+};
+/*
+template <typename T, int N>
+void show(T(&t)[N])
+{
+	for(int i=0; i<N; i++)
+		cout << t[i] << ' ';
+	cout << endl;
+}
+//T& Max(T*(&t)[N])
+/**/
+template <typename T,int N>
+T Max(T(&t)[N])
+{
+	int m=0;
+	for(int i=0;i<N;i++)
+		if(t[i]>t[m])
+			m=i;
+	return t[m];
+}
+/*
+
+
+*/
+int main()
+{
+	int a[4]={1,4,8,5};
+	double b[5]={1.2,6.5,3.5,9.1,18.4};
+	char c[4]={'b','x','f','R'};//x
+	Date d[4]={
+		Date(2000,1,3),
+		Date(2010,1,3),
+		Date(2010,1,5)
+		};
+	cout<<Max(a)<<endl;
+	cout<<Max(b)<<endl;
+	cout<<Max(c)<<endl;
+	cout<<Max(d)<<endl;
+//*/	
+}
