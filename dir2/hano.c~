@@ -20,7 +20,7 @@ void pin(int num)
 
 int main()
 {
-	hano('a',3,'c','b');
-	//pin(12345);
+//	hano('a',3,'b','c');
+	pin(12345);
 	return 0;
 }
