@@ -1,10 +1,6 @@
 #include <iostream>
+#include <cstdlib>
 using namespace std;
-/*
-	int* totalpoint =new int(x*y);
-	int* maxx = new int(x);
-	int* maxy = new int(y);
-*/
 //bool func(int* x,int* y,int**& b,int* cnt);
 bool func(int x,int y,int** b,int cnt,int i,int j,bool run=1);
 bool mid(int startx,int starty,int x,int y);
@@ -52,41 +48,46 @@ bool mid(int startx,int starty,int x,int y)
 bool func(int x,int y,int** b,int cnt,int i,int j,bool run)
 {
 //	cout <<"cc"<<cnt<<endl;
-	if(run==0)	return 0;
+	if(run==0)			return 0;	//{print(b,i,j);exit(1);}
 	if(x<0||x>=i||y<0||y>=j)	return 1;
-	if(cnt == i*j)	{
-		run=0;
-		return 0;}
-	if(b[x][y]<cnt&&b[x][y]!=0)
-		{
-	//		--cnt;
-			return 1;
-		}
-	b[x][y]=cnt+1;
-	if(cnt == i*j)	{	cout<<"ok"<<endl;return 0;}
-	
-//	cout <<"success  "<<cnt<<endl;
+	if(i*j==cnt+1)	{cout<<"ok"	<<endl;		return 0;}
+	if(b[x][y]==0)//||b[x][y]>=cnt)
+	{
+	b[x][y]=cnt+1;}
 	run=func(x+2,y-1,b,cnt+1,i,j,run);
+//	if((x+2)>=0&&(x+2)<i&&(y-1)>=0&&(y-1)<j&&run)
+//			{b[x+2][y-1]=0;}
+//	else		{print(b,i,j);}
 	run=func(x+2,y+1,b,cnt+1,i,j,run);
+//	if((x+2)>=0&&(x+2)<i&&(y+1)>=0&&(y+1)<j&&run)
+//			b[x+2][y+1]=0;
+//	else		print(b,i,j);
 	run=func(x+1,y+2,b,cnt+1,i,j,run);
+//	if((x+1)>=0&&(x+1)<i&&(y+2)>=0&&(y+2)<j&&run)
+//			b[x+1][y+2]=0;
+//	else		print(b,i,j);
 	run=func(x+1,y-2,b,cnt+1,i,j,run);
+//	if((x+1)>=0&&(x+1)<i&&(y-2)>=0&&(y-2)<j&&run)
+//			b[x+1][y-2]=0;
+//	else		print(b,i,j);
 	run=func(x-2,y-1,b,cnt+1,i,j,run);
+//	if((x-2)>=0&&(x-2)<i&&(y-1)>=0&&(y-1)<j&&run)
+//			b[x-2][y-1]=0;
+//	else		print(b,i,j);
 	run=func(x-2,y+1,b,cnt+1,i,j,run);
+//	if((x-2)>=0&&(x-2)<i&&(y+1)>=0&&(y+1)<j&&run)
+//			b[x-2][y+1]=0;
+//	else		print(b,i,j);
 	run=func(x-1,y+2,b,cnt+1,i,j,run);
+//	if((x-1)>=0&&(x-1)<i&&(y+2)>=0&&(y+2)<j&&run)
+//			b[x-1][y+2]=0;
+//	else		print(b,i,j);
 	run=func(x-1,y-2,b,cnt+1,i,j,run);
-	for(int m=0;m<i;m++)
-		for(int n=0;n<j;n++)
-			if(b[m][n]==cnt&&m!=x&&n!=y)
-				b[m][n]=0;
-	return 1;
+//	if((x-1)>=0&&(x-1)<i&&(y-2)>=0&&(y-2)<j&&run)
+//			b[x-1][y-2]=0;
+//	else		print(b,i,j);
+	
+	if(run)		b[x][y]=0;
+	return run;
 }
-/*
-void print(int** b)
-{
-	for(int i=0;i<x;i++){
-		for(int j=0;j<y;j++)
-			cout << b[i][j]<<' ';
-		cout << endl;
-	}
-}
-*/
+
