@@ -33,8 +33,7 @@ int main()
 void solveit(int startx,int starty ,int x,int y)
 {
 //clock it
-//new一个二维数组做棋盘,并没有多么耗时
-//	clock_t temp =clock();
+//new一个二维数组做棋盘
 	int **chessboard;
 	chessboard = new int*[x];
 	for(int i=0;i<x;i++)
@@ -42,10 +41,7 @@ void solveit(int startx,int starty ,int x,int y)
 	for(int i=0;i<x;i++)
 		for(int j=0;j<y;j++)
 			chessboard[i][j]=0;
-	int cnt=1;
-//	clock_t middle = clock();
-//	double t = (middle-temp)*1.0/CLOCKS_PER_SEC;
-//	cout << "time   new   "<<t<<endl;
+	int cnt=0;
 	if(!func(startx,starty,chessboard,cnt,x,y,1))	
 		print(chessboard,x,y);
 	else
@@ -59,8 +55,8 @@ bool func(int x,int y,int** b,int cnt,int i,int j,bool run)
 	if(run==0)			return 0;	
 	if(cnt==i*j)		return 0;
 	if(x>=0&&x<i&&y>=0&&y<j){	
-		if(b[x][y]>=cnt||b[x][y]==0){	
-			b[x][y]=cnt;
+		if(b[x][y]>cnt||b[x][y]==0){	
+			b[x][y]=cnt+1;
 			for(int m=0;m<i;m++)
 				for(int n=0;n<j;n++)
 					if(b[m][n]>=b[x][y]&&m!=x&&n!=y)
@@ -77,3 +73,9 @@ bool func(int x,int y,int** b,int cnt,int i,int j,bool run)
 	}
 	return run;
 }
+		/*
+		for(int m=0;m<i;m++)
+			for(int n=0;n<j;n++)
+				if(b[m][n]==cnt+1&&m!=x&&n!=y)
+					b[m][n]=0;
+					*/
