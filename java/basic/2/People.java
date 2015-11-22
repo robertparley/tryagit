@@ -1,0 +1,3 @@
+interface People{
+	void doSomeWork();
+}
